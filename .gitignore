@@ -1,0 +1,32 @@
+# Java
+*.jar
+*.war
+*.nar
+*.ear
+hs_err_pid*
+replay_pid*
+*.class
+*.log
+
+# Gradle 
+bin/
+build/
+.gradle
+.gradletasknamecache
+gradle-app.setting
+!gradle-wrapper.jar
+
+# Eclipse
+.settings/
+bin/
+tmp/
+.metadata
+.classpath
+.project
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+.factorypath

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "noc",
+  "version": "1.0.0",
+
+  "name": "nimrod's own client",
+  "description": "in-development, injection based hack client made for 1.19.2 with fabric-api",
+  "authors": [
+    "nimrod"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.nimrod.noc.Noc"
+    ]
+  },
+  "mixins": [
+    "noc.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.14",
+    "fabric-api": "*",
+    "minecraft": "~1.19.2",
+    "java": ">=17"
+  }
+}
