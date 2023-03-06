@@ -59,8 +59,8 @@ public class ConfigManager {
 
             reader.close();
 
-            for (JsonElement element : modulesArray) {
-                JsonObject moduleJson = (JsonObject) element;
+            for (JsonElement moduleElement : modulesArray) {
+                JsonObject moduleJson = (JsonObject) moduleElement;
 
                 Module module = Noc.moduleManager.getModule(moduleJson.get("name").getAsString());
                 
@@ -68,6 +68,37 @@ public class ConfigManager {
 
                 module.setKey(moduleJson.get("key").getAsInt());
                 module.setEnabled(moduleJson.get("enabled").getAsBoolean());
+
+				JsonArray settingsArray = moduleJson.getAsJsonArray("settings");
+                
+                for (JsonElement settingsElement : settingsArray) {
+					JsonObject settingJson = (JsonObject) settingsElement;
+
+					Setting setting = module.getSetting(settingJson.get("name").getAsString());
+
+					if (setting == null) throw new IllegalStateException("Cannot find parsed setting!");
+
+                    if (setting.getValue() instanceof Boolean)
+						setting.setValue(settingJson.get("value").getAsBoolean());
+					else if (setting.getValue() instanceof Number) {
+						Double raw = settingJson.get("value").getAsDouble();
+						if (setting.getValue() instanceof Integer)
+							setting.setValue(raw.intValue());
+						else if (setting.getValue() instanceof Long)
+							setting.setValue(raw.longValue());
+						else if (setting.getValue() instanceof Float)
+							setting.setValue(raw.floatValue());
+						else if (setting.getValue() instanceof Double)
+							setting.setValue(raw.doubleValue());
+						else
+							throw new IllegalStateException("Illegal setting type!");
+					} else if (setting.getValue() instanceof String)
+						setting.setValue(settingJson.get("value").getAsString());
+					else if (setting.getValue() instanceof Enum) {
+						setting.setValue(Enum.valueOf(((Enum<?>) setting.getValue()).getClass(), settingJson.get("value").getAsString()));
+					} else
+						throw new IllegalStateException("Illegal setting type!");
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -84,6 +115,28 @@ public class ConfigManager {
             moduleJson.addProperty("key", module.getKey());
             moduleJson.addProperty("enabled", module.getEnabled());
 
+			JsonArray settingsArray = new JsonArray();
+
+            for (Setting<?> setting : module.getSettings()) {
+                JsonObject settingJson = new JsonObject();
+
+                settingJson.addProperty("name", setting.getName());
+
+				if (setting.getValue() instanceof Boolean)
+					settingJson.addProperty("value", (Boolean) setting.getValue());
+				else if (setting.getValue() instanceof Number)
+					settingJson.addProperty("value", ((Number) setting.getValue()).doubleValue());
+				else if (setting.getValue() instanceof String)
+					settingJson.addProperty("value", (String) setting.getValue());
+				else if (setting.getValue() instanceof Enum)
+					settingJson.addProperty("value", ((Enum) setting.getValue()).name());
+				else
+					throw new IllegalStateException("Illegal setting type! " + setting.getName());
+
+				settingsArray.add((settingJson));
+            }
+
+			moduleJson.add("settings", settingsArray);
 			modulesArray.add(moduleJson);
         }
 

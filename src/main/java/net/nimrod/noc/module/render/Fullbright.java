@@ -29,7 +29,7 @@ public class Fullbright extends Module {
     public void onTick() {
         super.onTick();
 
-        mc.player.setStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 100, 9), mc.player);
+        mc.player.setStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 999999, 1), mc.player);
     }
 
 }

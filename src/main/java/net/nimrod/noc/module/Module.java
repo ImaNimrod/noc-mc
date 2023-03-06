@@ -1,14 +1,18 @@
 package net.nimrod.noc.module;
 
+import java.util.ArrayList;
 import net.minecraft.client.MinecraftClient;
+import net.nimrod.noc.util.Setting;
 
 public abstract class Module {
 
-    private String name;
-    private String description;
-    private Category category;
+    private final String name;
+    private final String description;
+    private final Category category;
     private int key;
     private boolean enabled;
+
+    private ArrayList<Setting> settings = new ArrayList<Setting>();
 
     protected MinecraftClient mc = MinecraftClient.getInstance();
 
@@ -36,16 +40,8 @@ public abstract class Module {
         return this.name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDescription() {
         return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Category getCategory() {
@@ -71,4 +67,18 @@ public abstract class Module {
         else onDisable();
     }
 
+    public ArrayList<Setting> getSettings() {
+        return settings;
+    }
+
+    public void addSetting(Setting<?> setting) {
+        settings.add(setting);
+    }
+
+	public Setting<?> getSetting(String name) { 
+        return settings.stream().filter(s -> s.getName()
+                                .equals(name))
+                                .findFirst()
+                                .orElse(null);
+    }
 }

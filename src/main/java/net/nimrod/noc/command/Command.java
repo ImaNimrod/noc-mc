@@ -4,8 +4,8 @@ import net.minecraft.client.MinecraftClient;
 
 public abstract class Command {
 
-    private String name;
-    private String description;
+    private final String name;
+    private final String description;
 
     protected MinecraftClient mc = MinecraftClient.getInstance();
 
@@ -20,16 +20,8 @@ public abstract class Command {
         return this.name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDescription() {
         return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
 }
