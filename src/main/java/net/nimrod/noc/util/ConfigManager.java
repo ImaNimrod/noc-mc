@@ -21,7 +21,7 @@ public class ConfigManager {
 			createFolders();
 			createFiles();
 		} catch (IOException e) {
-			Noc.INSTANCE.LOGGER.error(e.getMessage());
+            e.printStackTrace();
 		}
     }
 
@@ -29,7 +29,7 @@ public class ConfigManager {
 		try {
 			loadModules();
 		} catch (IOException e) {
-			Noc.INSTANCE.LOGGER.error(e.getMessage());
+            e.printStackTrace();
 		}
     }
 
@@ -37,7 +37,7 @@ public class ConfigManager {
 		try {
 			saveModules();
 		} catch (IOException e) {
-			Noc.INSTANCE.LOGGER.error(e.getMessage());
+            e.printStackTrace();
 		}
     }
 
@@ -70,7 +70,7 @@ public class ConfigManager {
                 module.setEnabled(moduleJson.get("enabled").getAsBoolean());
             }
         } catch (IOException e) {
-            Noc.INSTANCE.LOGGER.error(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -91,7 +91,7 @@ public class ConfigManager {
 			writer.write(modulesArray.toString());
             writer.close();
 		} catch (IOException e) {
-			Noc.INSTANCE.LOGGER.error(e.getMessage());
+            e.printStackTrace();
 		}
     }
 

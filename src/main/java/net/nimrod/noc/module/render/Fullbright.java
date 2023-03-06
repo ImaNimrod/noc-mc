@@ -8,8 +8,6 @@ import org.lwjgl.glfw.GLFW;
 
 public class Fullbright extends Module {
 
-    private double gamma;
-
     public Fullbright() {
         super("Fullbright", "Brightens your day (and night)", Category.RENDER, GLFW.GLFW_KEY_B);
     }
@@ -24,7 +22,6 @@ public class Fullbright extends Module {
         super.onDisable();
 
         if (mc.player == null) return;
-
         mc.player.removeStatusEffect(StatusEffects.NIGHT_VISION);
     }
 

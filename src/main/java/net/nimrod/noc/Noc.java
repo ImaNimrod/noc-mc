@@ -6,9 +6,8 @@ import net.minecraft.client.gui.screen.ChatScreen;
 import net.nimrod.noc.command.CommandManager;
 import net.nimrod.noc.module.ModuleManager;
 import net.nimrod.noc.util.ConfigManager;
+import net.nimrod.noc.util.Log;
 import org.lwjgl.glfw.GLFW;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class Noc implements ModInitializer {
 
@@ -16,7 +15,6 @@ public class Noc implements ModInitializer {
     public static final String VERSION = "1.0.0";
 
     public static final Noc INSTANCE = new Noc();
-    public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
 
     public static final CommandManager commandManager = new CommandManager();
     public static final ConfigManager configManager = new ConfigManager();
@@ -26,7 +24,7 @@ public class Noc implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LOGGER.info("Initializing " + NAME + " version: " + VERSION);
+		Log.consoleLog("Initializing " + NAME + " version: " + VERSION);
 
         configManager.loadConfig();
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> configManager.saveConfig()));

@@ -6,11 +6,9 @@ import org.lwjgl.glfw.GLFW;
 
 public class ModuleManager {
 
-    private ArrayList<Module> modules;
+    private ArrayList<Module> modules = new ArrayList<Module>();
     
     public ModuleManager() {
-        this.modules = new ArrayList<Module>();
-
         this.modules.add(new Fullbright());
         this.modules.add(new XRay());
     }

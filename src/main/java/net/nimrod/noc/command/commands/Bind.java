@@ -3,7 +3,9 @@ package net.nimrod.noc.command.commands;
 import net.minecraft.client.util.InputUtil;
 import net.nimrod.noc.Noc;
 import net.nimrod.noc.command.Command;
+import net.nimrod.noc.command.CommandManager;
 import net.nimrod.noc.module.Module;
+import net.nimrod.noc.util.Log;
 import org.lwjgl.glfw.GLFW;
 
 public class Bind extends Command {
@@ -22,23 +24,22 @@ public class Bind extends Command {
             Module module = Noc.moduleManager.getModule(args[1]);
 
             if (module == null) {
-                Noc.INSTANCE.LOGGER.info("Module not found");
+                Log.chatLog("Module not found");
                 return;
             } else {
                 int key = InputUtil.fromTranslationKey("key.keyboard." + args[2].toLowerCase()).getCode();
                 
                 module.setKey(key);
-                Noc.INSTANCE.LOGGER.info("Bind for " + module.getName() + " set to key: " + args[2].toLowerCase());
+                Log.chatLog("Bind for " + module.getName() + " set to key: " + args[2].toLowerCase());
             }
         } else if (args[0].equalsIgnoreCase("del")) {
             Module module = Noc.moduleManager.getModule(args[1]);
 
             if (module == null) {
-                Noc.INSTANCE.LOGGER.info("Module not found");
-                return;
+                Log.chatLog("Module not found");
             } else {
                 module.setKey(GLFW.GLFW_KEY_UNKNOWN);
-                Noc.INSTANCE.LOGGER.info("Bind removed for " + module.getName());
+                Log.chatLog("Bind removed for " + module.getName());
             }
         }
     }
