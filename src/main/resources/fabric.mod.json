@@ -3,8 +3,8 @@
   "id": "noc",
   "version": "1.0.0",
 
-  "name": "nimrod's own client",
-  "description": "in-development injection based hack client made with fabric-api for Minecraft 1.19.2",
+  "name": "Nimrod's Own Client",
+  "description": "In-development injection based hack client made with fabric-api for Minecraft 1.19.2",
   "authors": [
     "nimrod"
   ],

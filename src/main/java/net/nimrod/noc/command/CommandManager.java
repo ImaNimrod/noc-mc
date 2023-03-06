@@ -13,6 +13,7 @@ public class CommandManager {
 
     public CommandManager() {
         commands.put("bind", new Bind());
+        commands.put("info", new Info());
         commands.put("toggle", new Toggle());
     }
 

@@ -6,12 +6,14 @@ public abstract class Command {
 
     private final String name;
     private final String description;
+    private final String syntax;
 
     protected MinecraftClient mc = MinecraftClient.getInstance();
 
-    public Command(String name, String description) {
+    public Command(String name, String description, String syntax) {
         this.name = name;
         this.description = description;
+        this.syntax = syntax;
     }
 
     public void execute(String[] args) {}
@@ -22,6 +24,10 @@ public abstract class Command {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public String getSyntax() {
+        return "Syntax: " + this.syntax;
     }
 
 }
