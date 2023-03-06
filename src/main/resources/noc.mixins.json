@@ -9,6 +9,7 @@
     "BlockMixin",
     "ClientPlayerEntityMixin",
     "KeyboardMixin",
+    "LightmapTextureManagerMixin",
     "MinecraftClientMixin"
   ],
   "injectors": {

@@ -68,16 +68,16 @@ public abstract class Module {
     }
 
     public ArrayList<Setting> getSettings() {
-        return settings;
+        return this.settings;
     }
 
     public void addSetting(Setting<?> setting) {
-        settings.add(setting);
+        this.settings.add(setting);
     }
 
 	public Setting<?> getSetting(String name) { 
-        return settings.stream().filter(s -> s.getName()
-                                .equals(name))
+        return this.settings.stream().filter(s -> s.getName()
+                                .equalsIgnoreCase(name))
                                 .findFirst()
                                 .orElse(null);
     }

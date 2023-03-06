@@ -43,13 +43,10 @@ public class ModuleManager {
     }
 
     public Module getModule(String name) {
-        Module module = null;
-
-        for (Module m : this.modules) {
-            if (m.getName().equalsIgnoreCase(name)) module = m;
-        }
-
-        return module;
+        return this.modules.stream().filter(m -> m.getName()
+                                .equalsIgnoreCase(name))
+                                .findFirst()
+                                .orElse(null);
     }
 
 }
