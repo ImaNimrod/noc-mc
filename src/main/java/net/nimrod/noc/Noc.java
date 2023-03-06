@@ -5,6 +5,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.nimrod.noc.command.CommandManager;
 import net.nimrod.noc.module.ModuleManager;
+import net.nimrod.noc.util.ConfigManager;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,13 +19,17 @@ public class Noc implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
 
     public static final CommandManager commandManager = new CommandManager();
+    public static final ConfigManager configManager = new ConfigManager();
     public static final ModuleManager moduleManager = new ModuleManager();
 
-    protected static final MinecraftClient mc = MinecraftClient.getInstance();
+    protected final MinecraftClient mc = MinecraftClient.getInstance();
 
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Initializing " + NAME + " version: " + VERSION);
+
+        configManager.loadConfig();
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> configManager.saveConfig()));
 	}
 
     public void onTick() {
@@ -32,10 +37,9 @@ public class Noc implements ModInitializer {
     }
 
     public void onKeyPress(int key, int action) {
-        if (mc.currentScreen != null && mc.getOverlay() != null) return;
-
-        if (action == GLFW.GLFW_PRESS && commandManager.getPrefix().equals(GLFW.glfwGetKeyName(key, 0))) 
-            mc.setScreen(new ChatScreen(""));
+        if (mc.currentScreen == null && mc.getOverlay() == null &&
+            action == GLFW.GLFW_RELEASE && commandManager.getPrefix().equals(GLFW.glfwGetKeyName(key, 0)))
+            mc.setScreen(new ChatScreen(commandManager.getPrefix()));
 
         moduleManager.onKeyPress(key, action);
     }

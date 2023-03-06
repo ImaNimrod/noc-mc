@@ -1,16 +1,18 @@
 package net.nimrod.noc.module;
 
 import java.util.ArrayList;
-import java.util.List;
 import net.nimrod.noc.module.render.*;
 import org.lwjgl.glfw.GLFW;
 
 public class ModuleManager {
 
-    private List<Module> modules = new ArrayList<>();
+    private ArrayList<Module> modules;
     
     public ModuleManager() {
-        modules.add(new Fullbright());
+        this.modules = new ArrayList<Module>();
+
+        this.modules.add(new Fullbright());
+        this.modules.add(new XRay());
     }
 
     public void onTick() {
@@ -20,19 +22,20 @@ public class ModuleManager {
     }
 
     public void onKeyPress(int key, int action) {
-        if (action == GLFW.GLFW_PRESS) {
-            for (Module module : getModules()) {
-                if (key == module.getKey()) module.toggle();
+        if (action == GLFW.GLFW_RELEASE) {
+            for (Module module : this.modules) {
+                if (module.mc.currentScreen == null && module.mc.getOverlay() == null &&
+                    key == module.getKey()) module.toggle();
             }
         }
     }
 
-    public List<Module> getModules() {
+    public ArrayList<Module> getModules() {
         return this.modules;
     }
 
-    public List<Module> getEnabledModules() {
-        List<Module> enabledModules = new ArrayList();
+    public ArrayList<Module> getEnabledModules() {
+        ArrayList<Module> enabledModules = new ArrayList<Module>();
 
         for (Module module : this.modules) {
             if (module.getEnabled()) enabledModules.add(module);

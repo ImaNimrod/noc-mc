@@ -4,15 +4,14 @@ import net.minecraft.client.MinecraftClient;
 
 public abstract class Command {
 
-    private static String name;
-    private static String description;
+    private String name;
+    private String description;
 
-    protected static MinecraftClient mc;        
+    protected MinecraftClient mc = MinecraftClient.getInstance();
 
     public Command(String name, String description) {
         this.name = name;
         this.description = description;
-        this.mc = MinecraftClient.getInstance();
     }
 
     public void execute(String[] args) {}

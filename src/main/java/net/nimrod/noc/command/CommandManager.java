@@ -7,9 +7,9 @@ import net.nimrod.noc.command.commands.*;
 
 public class CommandManager {
 
-    private HashMap<String, Command> commands = new HashMap<>();
+    private HashMap<String, Command> commands = new HashMap<String, Command>();
 
-    private static final String prefix = ".";
+    private final String prefix = ".";
 
     public CommandManager() {
         commands.put("bind", new Bind());

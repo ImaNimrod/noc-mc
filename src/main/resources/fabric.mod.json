@@ -4,13 +4,12 @@
   "version": "1.0.0",
 
   "name": "nimrod's own client",
-  "description": "in-development, injection based hack client made for 1.19.2 with fabric-api",
+  "description": "in-development injection based hack client made with fabric-api for Minecraft 1.19.2",
   "authors": [
     "nimrod"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/GlowInTheDark123/noc-mc"
   },
 
   "license": "CC0-1.0",

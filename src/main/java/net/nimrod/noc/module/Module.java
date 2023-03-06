@@ -4,24 +4,20 @@ import net.minecraft.client.MinecraftClient;
 
 public abstract class Module {
 
-    private static String name;
-    private static Category category;
-    private static int key;
-    private static boolean enabled;
+    private String name;
+    private String description;
+    private Category category;
+    private int key;
+    private boolean enabled;
 
-    protected static MinecraftClient mc;        
+    protected MinecraftClient mc = MinecraftClient.getInstance();
 
-    public enum Category {
-        COMBAT,
-        MOVEMENT,
-        RENDER,
-    }
-
-    public Module(String name, Category category, int key) {
+    public Module(String name, String description, Category category, int key) {
         this.name = name;
+        this.description = description;
         this.category = category;
         this.key = key;
-        this.mc = MinecraftClient.getInstance();
+        this.enabled = false;
     }
 
     public void onEnable() {}
@@ -30,26 +26,34 @@ public abstract class Module {
     public void toggle() {
         this.enabled = !this.enabled;
 
-        if (enabled) onEnable();
+        if (this.enabled) onEnable();
         else onDisable();
     }
 
     public void onTick() {}
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Category getCategory() {
-        return category;
+        return this.category;
     }
 
     public int getKey() {
-        return key;
+        return this.key;
     }
 
     public void setKey(int key) {
@@ -57,13 +61,13 @@ public abstract class Module {
     }
 
     public boolean getEnabled() {
-        return enabled;
+        return this.enabled;
     }
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
 
-        if (enabled) onEnable();
+        if (this.enabled) onEnable();
         else onDisable();
     }
 
