@@ -2,7 +2,6 @@ package net.nimrod.noc.command;
 
 import java.util.HashMap;
 import java.util.Map;
-import net.nimrod.noc.Noc;
 import net.nimrod.noc.command.commands.*;
 
 public class CommandManager {

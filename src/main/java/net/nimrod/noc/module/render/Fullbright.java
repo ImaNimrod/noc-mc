@@ -11,8 +11,6 @@ public class Fullbright extends Module {
 
     private Setting<Mode> mode = new Setting<Mode>("Mode", "Mode to use Fullbright", Mode.Gamma, null, null);
 
-    private double prevGamma;
-
     public Fullbright() {
         super("Fullbright", "Brightens your day (and night)", Category.RENDER, GLFW.GLFW_KEY_B);
 
